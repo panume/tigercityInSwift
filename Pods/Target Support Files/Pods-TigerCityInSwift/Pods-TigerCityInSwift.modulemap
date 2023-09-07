@@ -1,0 +1,6 @@
+framework module Pods_TigerCityInSwift {
+  umbrella header "Pods-TigerCityInSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
