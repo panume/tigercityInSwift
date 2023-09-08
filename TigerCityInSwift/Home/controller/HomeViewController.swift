@@ -7,31 +7,62 @@
 
 import UIKit
 import SnapKit
+import JXSegmentedView
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, JXSegmentedListContainerViewDataSource {
+    
+    func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
+        return 2
+    }
+    
+    func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
+        switch index {
+        case 0:
+            return HomeRecommendViewController.init()
+            
+        case 1:
+            return HomeBrandListController.init()
+            
+        default:
+            return HomeRecommendViewController.init()
 
+        }
+    }
+    
+
+    lazy var navView: HomeNavigationView = {
+        let navView = HomeNavigationView(frame: CGRectZero)
+        
+        return navView
+    }()
+    
+    lazy var listContainerView: JXSegmentedListContainerView = {
+        let containerView = JXSegmentedListContainerView(dataSource: self)
+        return containerView
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.title = "首页111"
         self.view.backgroundColor = UIColor.white
-     
+        self.navigationController?.navigationBar.isHidden = true
         self.setupUI()
     }
     
     
     func setupUI() {
-        let button = UIButton.init(type: .custom)
-        button.setTitle("跳转", for: .normal)
-        button.setTitleColor(UIColor.red, for: .normal)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        self.view.addSubview(button)
-
-        button.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.height.equalTo(44)
-            make.center.equalTo(self.view)
+        self.view.addSubview(navView)
+        self.view.addSubview(listContainerView)
+        navView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+        
+        listContainerView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview().offset(0)
+            make.top.equalTo(navView.snp.bottom).offset(0)
         }
     }
 
