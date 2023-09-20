@@ -11,6 +11,7 @@ import JXSegmentedView
 class HomeNavigationView: UIView, JXSegmentedViewDelegate {
 
     var titlesDataSource: JXSegmentedTitleDataSource!
+    var _listContainer: JXSegmentedViewListContainer!
     
     lazy var label1: UILabel = {
         let label = UILabel.init()
@@ -56,7 +57,7 @@ class HomeNavigationView: UIView, JXSegmentedViewDelegate {
             make.right.equalToSuperview().offset(-16)
             make.width.equalTo(120)
             make.height.equalTo(44)
-            make.top.equalToSuperview().offset(20 + safeAreaInsets.top)
+            make.top.equalTo(self.safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
         
@@ -86,7 +87,8 @@ class HomeNavigationView: UIView, JXSegmentedViewDelegate {
             return self.listContainer
         }
         set {
-            self.listContainer = newValue
+            _listContainer = newValue
+            segmentedView.listContainer = _listContainer
             segmentedView.reloadData()
         }
     }

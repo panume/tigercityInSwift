@@ -64,6 +64,9 @@ class HomeViewController: UIViewController, JXSegmentedListContainerViewDataSour
             make.left.right.bottom.equalToSuperview().offset(0)
             make.top.equalTo(navView.snp.bottom).offset(0)
         }
+        
+//        navView.titlesDataSource = 
+        navView.listContainer = listContainerView
     }
 
     @objc func buttonPressed() {

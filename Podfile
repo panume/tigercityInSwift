@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '11.0'
 
 target 'TigerCityInSwift' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,4 +9,12 @@ target 'TigerCityInSwift' do
     pod 'JXSegmentedView'
     pod 'SnapKit'
     pod 'Moya', '~> 15.0'
+    pod 'Moya/RxSwift'
+    pod 'SwifterSwift'
+    pod 'ObjectMapper'
+    pod 'RxSwift'
+    pod "Alamofire"
+    pod 'Kingfisher'
+    pod 'SwiftyJSON', '~> 4.0'
+    pod 'RxCocoa'
 end
