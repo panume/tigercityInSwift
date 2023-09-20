@@ -61,15 +61,23 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var tagLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor(hex: 0x666666)
+        return label
+    }()
+    
     func setupUI() {
         self.contentView.addSubview(picture)
         self.contentView.addSubview(collectIcon)
+        self.contentView.addSubview(tagLabel)
         self.contentView.addSubview(brandLabel)
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(priceLabel)
         self.contentView.addSubview(rawPriceLabel)
         
-        let width =
+        let width = (screen_width - 56) / 2
         collectIcon.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(18)
             make.right.equalToSuperview().offset(-16)
@@ -80,7 +88,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
         picture.snp.makeConstraints { make in
             make.top.equalTo(collectIcon.snp.bottom)
-            make.height.eq
+            make.size.equalTo(width)
+            make.centerX.equalToSuperview()
+        }
+        
+        brandLabel.snp.makeConstraints { make in
+            
         }
         
     }
