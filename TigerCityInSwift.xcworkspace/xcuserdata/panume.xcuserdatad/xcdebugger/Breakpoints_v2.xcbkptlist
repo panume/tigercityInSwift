@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "52ECDD4D-14B6-4133-9E92-59CA43984F8E"
+            uuid = "ADF029C5-41D1-442C-BA49-97CB29799E3A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TigerCityInSwift/Home/controller/HomeRecommendViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "requestConfigureData()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "requestList()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

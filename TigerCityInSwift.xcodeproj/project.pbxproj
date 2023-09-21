@@ -10,6 +10,8 @@
 		A1175E79032784541D096CA6 /* Pods_TigerCityInSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A5721DCE7AFF19DA9F24E5 /* Pods_TigerCityInSwift.framework */; };
 		F988E3662ABAE9CC00C6509F /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988E3652ABAE9CC00C6509F /* Basic.swift */; };
 		F988E3682ABAF4D700C6509F /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988E3672ABAF4D700C6509F /* Macro.swift */; };
+		F988E36A2ABC15F900C6509F /* BasicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988E3692ABC15F900C6509F /* BasicModel.swift */; };
+		F988E36C2ABC381800C6509F /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988E36B2ABC381800C6509F /* BaseResponse.swift */; };
 		F9AD84702AA8196A00B9E98F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD846F2AA8196A00B9E98F /* AppDelegate.swift */; };
 		F9AD84722AA8196A00B9E98F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD84712AA8196A00B9E98F /* SceneDelegate.swift */; };
 		F9AD84742AA8196A00B9E98F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9AD84732AA8196A00B9E98F /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 		D8A5721DCE7AFF19DA9F24E5 /* Pods_TigerCityInSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TigerCityInSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F988E3652ABAE9CC00C6509F /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 		F988E3672ABAF4D700C6509F /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		F988E3692ABC15F900C6509F /* BasicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicModel.swift; sourceTree = "<group>"; };
+		F988E36B2ABC381800C6509F /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		F9AD846C2AA8196A00B9E98F /* TigerCityInSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TigerCityInSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9AD846F2AA8196A00B9E98F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9AD84712AA8196A00B9E98F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 				F9AD848C2AA8783300B9E98F /* BaseNavigationController.swift */,
 				F988E3652ABAE9CC00C6509F /* Basic.swift */,
 				F988E3672ABAF4D700C6509F /* Macro.swift */,
+				F988E3692ABC15F900C6509F /* BasicModel.swift */,
+				F988E36B2ABC381800C6509F /* BaseResponse.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -321,10 +327,12 @@
 				F9AD848D2AA8783300B9E98F /* BaseNavigationController.swift in Sources */,
 				F9AD84962AAB133700B9E98F /* ProductCollectionViewCell.swift in Sources */,
 				F9AD84702AA8196A00B9E98F /* AppDelegate.swift in Sources */,
+				F988E36A2ABC15F900C6509F /* BasicModel.swift in Sources */,
 				F9AD84942AAB09AB00B9E98F /* HomeRecommendViewController.swift in Sources */,
 				F9AD84722AA8196A00B9E98F /* SceneDelegate.swift in Sources */,
 				F9C986162AB1BF1D00780A79 /* Api.swift in Sources */,
 				F9AD84852AA8513700B9E98F /* HomeViewController.swift in Sources */,
+				F988E36C2ABC381800C6509F /* BaseResponse.swift in Sources */,
 				F988E3682ABAF4D700C6509F /* Macro.swift in Sources */,
 				F988E3662ABAE9CC00C6509F /* Basic.swift in Sources */,
 				F9C986122AAF105E00780A79 /* ProductModel.swift in Sources */,

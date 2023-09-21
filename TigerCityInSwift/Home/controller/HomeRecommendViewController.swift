@@ -12,8 +12,9 @@ import ObjectMapper
 class HomeRecommendViewController: UIViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var list = NSMutableArray()
-    var configure: ModuleConfigResult?
-    
+    var configure: ModuleConfigData?
+    var page = 1
+     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
@@ -61,13 +62,35 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
         tigerCityProvider.request(.homeConfigure) { result in
             do {
                 let response = try result.get()
-                let value = try response.mapString()
-                self.configure = ModuleConfigResult(JSONString: value)
-//                self.tableView.reloadData()
-                print(value)
+                
+                let baseResponse = BaseResponse(response)
+                
+                
+                
+//                guard let vv = try response.mapJSON() as? NSDictionary  else {
+//                    return
+//                }
+                let data = baseResponse.data as! NSDictionary
+                let configData = data.value(forKey: "moduleConfig")
+                if configData != nil {
+                    self.configure = ModuleConfigData(JSON: configData as! [String : Any])
+                }
+                self.requestList()
             } catch {
                 let printableError = error as CustomStringConvertible
 //                self.showAlert("GitHub Fetch", message: printableError.description)
+            }
+        }
+    }
+    
+    func requestList() {
+        tigerCityProvider.request(.productList(url: configure?.dataView?.serviceUrl ?? "", page: page, pageNum: gPageSize)) { result in
+            do {
+                let response = try result.get()
+                
+                
+            } catch {
+                
             }
         }
     }

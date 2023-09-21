@@ -92,8 +92,15 @@ class ProductCollectionViewCell: UICollectionViewCell {
             make.centerX.equalToSuperview()
         }
         
+        tagLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
+            make.top.equalTo(picture.snp.bottom)
+        }
+        
         brandLabel.snp.makeConstraints { make in
-            
+            make.left.equalToSuperview().offset(designSize(16))
+            make.right.equalToSuperview().offset(-designSize(16))
+            make.top.equalTo(picture.snp.bottom).offset(designSize(19))
         }
         
     }

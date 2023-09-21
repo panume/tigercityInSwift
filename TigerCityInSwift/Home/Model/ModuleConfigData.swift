@@ -31,7 +31,7 @@ class ModuleConfigResult: Mappable {
 class ModuleConfigData: Mappable {
     
     var dataView: DataView?
-    var moduleItem: Any?
+    var moduleItem: [String: String]?
     var modules: [ModuleItem]?
     required init?(map: ObjectMapper.Map) {
     }

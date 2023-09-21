@@ -49,7 +49,7 @@ class ProductModel: Mappable {
         spuId         <- map["spuId"]
         prodName      <- map["prodName"]
         sku           <- map["sku"]
-
+        
     }
     
     

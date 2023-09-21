@@ -17,4 +17,6 @@ target 'TigerCityInSwift' do
     pod 'Kingfisher'
     pod 'SwiftyJSON', '~> 4.0'
     pod 'RxCocoa'
+    pod 'Toast-Swift'
+    
 end
