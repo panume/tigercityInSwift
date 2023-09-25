@@ -8,13 +8,15 @@
 import UIKit
 import JXSegmentedView
 import ObjectMapper
+import Toast_Swift
 
 class HomeRecommendViewController: UIViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var list = NSMutableArray()
     var configure: ModuleConfigData?
     var page = 1
-     
+    var productSummary: ProductListSummary?
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.count
     }
@@ -59,10 +61,12 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
     }
     
     func requestConfigureData() {
+        
         tigerCityProvider.request(.homeConfigure) { result in
+            
             do {
                 let response = try result.get()
-                
+                    
                 let baseResponse = BaseResponse(response)
                 
                 
@@ -78,7 +82,7 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
                 self.requestList()
             } catch {
                 let printableError = error as CustomStringConvertible
-//                self.showAlert("GitHub Fetch", message: printableError.description)
+                self.view.makeToast(printableError.description)//                self.showAlert("GitHub Fetch", message: printableError.description)
             }
         }
     }
@@ -87,7 +91,9 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
         tigerCityProvider.request(.productList(url: configure?.dataView?.serviceUrl ?? "", page: page, pageNum: gPageSize)) { result in
             do {
                 let response = try result.get()
-                
+                let baseResponse = BaseResponse(response)
+                self.productSummary = ProductListSummary(JSON: baseResponse.data as! [String : Any])
+                self.collectionView.reloadData()
                 
             } catch {
                 
