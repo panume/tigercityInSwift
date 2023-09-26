@@ -7,5 +7,10 @@
 
 import Foundation
 
-
+class Adapter {
+    class func priceYuan(price: Double) -> String {
+        let number = NSDecimalNumber(string: "\(price)")
+        Decimal()
+    }
+}
 

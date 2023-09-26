@@ -16,3 +16,5 @@ let gPageSize = 20
 func designSize(_ size: CGFloat) -> CGFloat {
     return screen_width * size / designScreenWidth
 }
+
+

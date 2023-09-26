@@ -10,15 +10,9 @@ import SwifterSwift
 import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
-    
-    var _model: ProductModel?
-    
-    var model: ProductModel {
-        get {
-            return self.model
-        }
-        set {
-            _model = newValue
+        
+    var model: ProductModel? {
+        didSet {
             self.setInfo()
         }
     }
@@ -58,6 +52,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(hex: 0x666666)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -68,6 +63,27 @@ class ProductCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var rightLine: UIView = {
+        let line = UIView()
+        line.backgroundColor = Basic().color.lineColor
+        return line
+    }()
+    
+    lazy var bottomLine: UIView = {
+        let line = UIView()
+        line.backgroundColor = Basic().color.lineColor
+        return line
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("111")
+    }
+    
     func setupUI() {
         self.contentView.addSubview(picture)
         self.contentView.addSubview(collectIcon)
@@ -76,7 +92,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(priceLabel)
         self.contentView.addSubview(rawPriceLabel)
-        
+        self.contentView.addSubview(rightLine)
+        self.contentView.addSubview(bottomLine)
+
         let width = (screen_width - 56) / 2
         collectIcon.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(18)
@@ -103,11 +121,46 @@ class ProductCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(picture.snp.bottom).offset(designSize(19))
         }
         
+        nameLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(designSize(16))
+            make.right.equalToSuperview().offset(-designSize(16))
+            make.top.equalTo(brandLabel.snp.bottom).offset(4)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(designSize(16))
+            make.bottom.equalToSuperview().offset(-designSize(40))
+        }
+        
+        rawPriceLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(priceLabel)
+            make.left.equalTo(priceLabel.snp.right).offset(designSize(8))
+        }
+        
+        rightLine.snp.makeConstraints { make in
+            make.top.bottom.right.equalToSuperview()
+            make.height.equalTo(designSize(0.5))
+        }
+        
+        bottomLine.snp.makeConstraints { make in
+            make.left.bottom.right.equalToSuperview()
+            make.height.equalTo(designSize(0.5))
+        }
+        
     }
     
     func setInfo() {
-        self.picture.kf.setImage(with: URL(string: _model?.thumbUrl))
-        self.brandLabel.text = _model?.brandName
+        picture.kf.setImage(with: URL(string: model?.thumbUrl))
+        brandLabel.text = model?.brandName
+        nameLabel.text = model?.prodName
+        
+        let muString = NSMutableAttributedString(string: model?.price?)
+        muString.addAttribute(.font, value: <#T##Any#>, range: <#T##NSRange#>)
+        priceLabel.attributedText = muString
+    }
+    
+    func setShowRightLine(show: Bool) {
+        rightLine.isHidden = !show
     }
     
     

@@ -10,9 +10,9 @@ import JXSegmentedView
 import ObjectMapper
 import Toast_Swift
 
-class HomeRecommendViewController: UIViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeRecommendViewController: UIViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var list = NSMutableArray()
+    var list = [ProductModel]()
     var configure: ModuleConfigData?
     var page = 1
     var productSummary: ProductListSummary?
@@ -23,10 +23,14 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCollectionViewCell
-        cell.model = list[indexPath.row] as! ProductModel
+        cell.model = list[indexPath.row]
+        cell.setShowRightLine(show: indexPath.row % 2 == 0)
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: screen_width / 2.0, height: designSize(330))
+    }
     
     func listView() -> UIView {
         return self.view
@@ -35,10 +39,13 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
 
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: "ProductCell")
+        collectionView.showsVerticalScrollIndicator = false
         
         return collectionView
     }()
@@ -93,6 +100,13 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
                 let response = try result.get()
                 let baseResponse = BaseResponse(response)
                 self.productSummary = ProductListSummary(JSON: baseResponse.data as! [String : Any])
+                
+                if self.page > 1 {
+                    self.list += (self.productSummary?.items)!
+                } else {
+                    self.list = (self.productSummary?.items)!
+                }
+                
                 self.collectionView.reloadData()
                 
             } catch {
