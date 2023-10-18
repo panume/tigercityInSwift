@@ -29,15 +29,15 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "DINAlternate-Bold", size: 14)
-        label.textColor = UIColor(hex: 0xC31426)
+        label.font = Basic.font.numFontWithDesign(size: 14)
+        label.textColor = Basic.color.redColor
         return label
     }()
     
     lazy var rawPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(hex: 0xC31426)
+        label.textColor = Basic.color.color3
         return label
     }()
     
@@ -65,13 +65,13 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     lazy var rightLine: UIView = {
         let line = UIView()
-        line.backgroundColor = Basic().color.lineColor
+        line.backgroundColor = Basic.color.lineColor
         return line
     }()
     
     lazy var bottomLine: UIView = {
         let line = UIView()
-        line.backgroundColor = Basic().color.lineColor
+        line.backgroundColor = Basic.color.lineColor
         return line
     }()
     
@@ -139,7 +139,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
         rightLine.snp.makeConstraints { make in
             make.top.bottom.right.equalToSuperview()
-            make.height.equalTo(designSize(0.5))
+            make.width.equalTo(designSize(0.5))
         }
         
         bottomLine.snp.makeConstraints { make in
@@ -154,9 +154,12 @@ class ProductCollectionViewCell: UICollectionViewCell {
         brandLabel.text = model?.brandName
         nameLabel.text = model?.prodName
         
-        let muString = NSMutableAttributedString(string: model?.price?)
-        muString.addAttribute(.font, value: <#T##Any#>, range: <#T##NSRange#>)
-        priceLabel.attributedText = muString
+        priceLabel.text = "¥"+Adapter.priceYuan(price: (model?.price)!)
+        
+        let rawPrice = NSMutableAttributedString(string: "¥" + Adapter.priceYuan(price: (model?.rawPrice)!))
+        rawPrice.addAttribute(.strikethroughStyle, value: 1, range: NSMakeRange(0, rawPrice.length))
+        rawPriceLabel.attributedText = rawPrice
+
     }
     
     func setShowRightLine(show: Bool) {

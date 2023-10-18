@@ -17,4 +17,6 @@ func designSize(_ size: CGFloat) -> CGFloat {
     return screen_width * size / designScreenWidth
 }
 
-
+let kModuleTypeTopBanner = "Banner"
+let kModuleTypeColPic = "ColPic"
+let kModuleTypeActiveCategory = "CategoryView"

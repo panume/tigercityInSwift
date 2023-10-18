@@ -18,5 +18,6 @@ target 'TigerCityInSwift' do
     pod 'SwiftyJSON', '~> 4.0'
     pod 'RxCocoa'
     pod 'Toast-Swift'
-    
+    pod 'MJRefresh'
+    pod 'JXSegmentedView'
 end

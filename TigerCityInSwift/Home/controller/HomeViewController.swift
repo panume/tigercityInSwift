@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import JXSegmentedView
 
-class HomeViewController: UIViewController, JXSegmentedListContainerViewDataSource {
+class HomeViewController: BaseViewController, JXSegmentedListContainerViewDataSource {
     
     func numberOfLists(in listContainerView: JXSegmentedListContainerView) -> Int {
         return 2

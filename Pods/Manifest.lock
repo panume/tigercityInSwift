@@ -2,6 +2,7 @@ PODS:
   - Alamofire (5.5.0)
   - JXSegmentedView (1.2.7)
   - Kingfisher (7.9.1)
+  - MJRefresh (3.7.5)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -49,6 +50,7 @@ DEPENDENCIES:
   - Alamofire
   - JXSegmentedView
   - Kingfisher
+  - MJRefresh
   - Moya (~> 15.0)
   - Moya/RxSwift
   - ObjectMapper
@@ -64,6 +66,7 @@ SPEC REPOS:
     - Alamofire
     - JXSegmentedView
     - Kingfisher
+    - MJRefresh
     - Moya
     - ObjectMapper
     - RxCocoa
@@ -78,6 +81,7 @@ SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   JXSegmentedView: eb1cad21f57c2543c00c3e08b8fd3c7ca54f5acd
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -88,6 +92,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 4689e6617f7c317504e436456e553c29a543d3c3
+PODFILE CHECKSUM: fb66fb48eebda8c62811198e4a69d4f433b7a7ee
 
 COCOAPODS: 1.11.2

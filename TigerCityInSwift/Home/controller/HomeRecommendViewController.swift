@@ -9,8 +9,9 @@ import UIKit
 import JXSegmentedView
 import ObjectMapper
 import Toast_Swift
+import MJRefresh
 
-class HomeRecommendViewController: UIViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeRecommendViewController: BaseViewController, JXSegmentedListContainerViewListDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var list = [ProductModel]()
     var configure: ModuleConfigData?
@@ -32,6 +33,36 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
         return CGSize(width: screen_width / 2.0, height: designSize(330))
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeReusableView", for: indexPath) as! HomeReusableView
+            headerView.contentList = configure?.modules
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        var top = 0.0
+        if let list = configure?.modules {
+            for moduleData in list {
+                top += designSize(moduleData.topMargin!) / 2.0
+                let height = screen_width * (moduleData.height)! / (moduleData.width)!
+                top += height
+            }
+            print(top)
+        }
+        return CGSize(width: screen_width, height: top)
+
+    }
+    
+
+    
     func listView() -> UIView {
         return self.view
     }
@@ -46,7 +77,7 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
         collectionView.dataSource = self
         collectionView.register(ProductCollectionViewCell.self, forCellWithReuseIdentifier: "ProductCell")
         collectionView.showsVerticalScrollIndicator = false
-        
+        collectionView.register(HomeReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeReusableView")
         return collectionView
     }()
     
@@ -55,16 +86,25 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
 
         // Do any additional setup after loading the view.
         
-        self.view.addSubview(collectionView)
+        collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.page = 1
+            self.requestList()
+        })
         
-        collectionView.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview()
-        }
-        
-//        list.addObjects(from: ["1", "2"])
-//        collectionView.reloadData()
+        collectionView.mj_footer = MJRefreshFooter(refreshingBlock: {
+            self.page += 1
+            self.requestList()
+        })
         
         self.requestConfigureData()
+    }
+    
+    override func setupUI() {
+        self.view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(designSize(10))
+        }
     }
     
     func requestConfigureData() {
@@ -73,14 +113,7 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
             
             do {
                 let response = try result.get()
-                    
                 let baseResponse = BaseResponse(response)
-                
-                
-                
-//                guard let vv = try response.mapJSON() as? NSDictionary  else {
-//                    return
-//                }
                 let data = baseResponse.data as! NSDictionary
                 let configData = data.value(forKey: "moduleConfig")
                 if configData != nil {
@@ -96,6 +129,13 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
     
     func requestList() {
         tigerCityProvider.request(.productList(url: configure?.dataView?.serviceUrl ?? "", page: page, pageNum: gPageSize)) { result in
+            
+            if self.page == 1 {
+                self.collectionView.mj_header?.endRefreshing()
+            } else {
+                self.collectionView.mj_footer?.endRefreshing()
+            }
+
             do {
                 let response = try result.get()
                 let baseResponse = BaseResponse(response)
@@ -114,6 +154,4 @@ class HomeRecommendViewController: UIViewController, JXSegmentedListContainerVie
             }
         }
     }
-  
-
 }

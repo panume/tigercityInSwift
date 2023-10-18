@@ -54,7 +54,8 @@ class ModuleItem: Mappable {
     var topMargin: Double?
     var type: String?
     var width: Double?
-
+    var columnCount: Int = 1
+    
     required init?(map: ObjectMapper.Map) {
         
     }
@@ -68,7 +69,7 @@ class ModuleItem: Mappable {
         topMargin <- map["topMargin"]
         type <- map["type"]
         width <- map["width"]
-
+        columnCount <- map["columnCount"]
     }
     
     
